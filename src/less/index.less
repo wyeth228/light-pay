@@ -1,4 +1,9 @@
 @import "@/less/modules/pay-form.less";
+@import "@/less/modules/button.less";
+@import "@/less/modules/amount-input.less";
+@import "@/less/modules/base-input.less";
+
+@import "@/less/mixins/box-shadow-transition.less";
 
 * {
   margin: 0;
@@ -17,5 +22,24 @@ body {
   height: 100%;
 
   font-size: 14px;
+
+  background-color: #E5E5E5;
 }
 
+.wrapper {
+  width: 500px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}

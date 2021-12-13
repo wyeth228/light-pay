@@ -1,0 +1,132 @@
+.base-input {
+  width: 259px;
+  height: 62px;
+
+  display: block;
+
+  position: relative;
+
+  &__input {
+    width: inherit;
+    height: inherit;
+
+    background-color: #FFFFFF;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+
+    padding: 20px 26px;
+
+    border-radius: 15px;
+    
+    font-weight: 400;
+    font-size: 19px;
+
+    -webkit-transition: background-color linear 0.3s, border linear 0.3s;
+    -o-transition: background-color linear 0.3s, border linear 0.3s;
+    -moz-transition: background-color linear 0.3s, border linear 0.3s;
+    transition: background-color linear 0.3s, border linear 0.3s;
+
+    &::placeholder {
+      color:rgba(0, 0, 0, 0.2);
+      
+      font-weight: 400;
+      font-size: 19px;
+    }
+
+    &_error {
+      background-color: #FFD6D6;
+
+      border: 1px solid #FF0000;
+      
+      &::placeholder {
+        color: rgba(255, 0, 0, 0.2);
+      }
+    }
+  }
+
+  &__message {
+    position: absolute;
+    right: -217px;
+    top: -88px;
+    z-index: 2;
+
+    max-width: 244px;
+
+    font-weight: 500;
+    font-size: 20px;
+
+    padding: 13px 30px;
+
+    text-align: center;
+
+    color: #0085FF;
+    background-color: #99CEFF;
+
+    border: 1px solid #0085FF;
+
+    border-radius: 17px 17px 17px 0px;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    -webkit-transition: visibility 0s linear 0.5s, opacity linear 0.5s;
+    -o-transition: visibility 0s linear 0.5s, opacity linear 0.5s;
+    -moz-transition: visibility 0s linear 0.5s, opacity linear 0.5s;
+    transition: visibility 0s linear 0.5s, opacity linear 0.5s;
+
+    &_active {
+      visibility: visible;
+
+      opacity: 1;
+
+      transition-delay: 0s;
+    }
+  }
+
+  &__info {
+    width: 53px;
+    height: 50px;
+
+    position: absolute;
+    top: 6px;
+    right: 11px;
+
+    font-weight: 500;
+    font-size: 27px;
+
+    color:rgba(0, 0, 0, 0.2);
+    background-color: #99CEFF;
+    
+    border-radius: 15px;
+    
+    cursor: pointer;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    -webkit-transition: color linear 0.3s, background-color linear 0.3s;
+    -o-transition: color linear 0.3s, background-color linear 0.3s;
+    -moz-transition: color linear 0.3s, background-color linear 0.3s;
+    transition: color linear 0.3s, background-color linear 0.3s;
+
+    &_gray {
+      color: rgba(0, 0, 0, 0.2);
+      background-color: #F6F6F6;
+    }
+  }
+}
