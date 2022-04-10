@@ -3,15 +3,12 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-
-__webpack_base_uri__ = "http://localhost:8080/";
 
 module.exports = {
   entry: path.resolve(__dirname, "src/index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash].js"
+    filename: "[name].[contenthash].js",
   },
   module: {
     rules: [
@@ -26,10 +23,17 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: "file-loader",
+        exclude: path.resolve(__dirname, "src/assets/fonts"),
         options: {
-          name: "/src/assets/icons/[name].[ext]"
+          name: "[name].[ext]",
+          outputPath: "assets/icons/",
+          esModule: false
         }
-    }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource"
+      },
     ],
   },
   resolve: {
@@ -39,11 +43,9 @@ module.exports = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin(
-      {
-        template: path.resolve(__dirname, "public/index.html")
-      }
-    ),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "public/index.html")
+    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
   ]

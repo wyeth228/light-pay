@@ -5,10 +5,6 @@ import validateEmail from "../src/js/validateEmail";
 
 import IMask from 'imask';
 
-import masterCard from "../src/assets/icons/master-card.png";
-import qiwi from "../src/assets/icons/qiwi.svg";
-import umoney from "../src/assets/icons/umoney.svg";
-
 class App {
   constructor() {
     this.currencies = ["₽", "$", "€", "₴"];
@@ -20,6 +16,8 @@ class App {
       phoneNumber: "",
       phoneMask: false,
       email: "",
+      phoneChars: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+"],
+      payStateActive: false,
     };
 
     this.imgData = {
@@ -76,10 +74,6 @@ class App {
 
     this.phoneInput.addEventListener("input", this.phoneInputActive.bind(this));
 
-    this.data.phoneMask = IMask(this.phoneInput, {
-      mask: '+{7}0000000000'
-    });
-
     this.emailInput.addEventListener("input", this.emailInputActive.bind(this));
 
     this.sendBtn.addEventListener("click", this.send.bind(this));
@@ -88,8 +82,20 @@ class App {
   setPayState() {
     this.title.innerHTML = "Введите данные";
 
-    this.defaultState.style.display = "none";
-    this.payState.classList.add("pay-form__pay_active");
+    this.defaultState.classList.remove("pay-form__default_active");
+
+    setTimeout(() => {
+      this.payBody.classList.add("pay-form__body_minheight2");
+
+      this.defaultState.style.display = "none";
+
+      this.payState.classList.add("pay-form__pay_active");
+
+      setTimeout(() => {
+        this.payState.style.overflow = "visible";
+        this.data.payStateActive = true;
+      }, 2000);
+    }, 200);
 
     this.payLogo.src = this.imgData.path + this.imgData.methods[ this.data.methodId ];
 
@@ -97,13 +103,15 @@ class App {
     this.totalCurrency.innerHTML = this.data.currency;
   }
 
-  toggleCurrencyDrop() {
+  toggleCurrencyDrop(e) {
+    if (e) e.stopPropagation();
+
     const CURRENCY_ACTIVE_CLASS = "amount-input__currency-drop_active";
     
     if (this.currencyDrop.classList.contains(CURRENCY_ACTIVE_CLASS)) {
       this.currencyDrop.classList.remove(CURRENCY_ACTIVE_CLASS);
     } else {
-      this.currencyDrop.classList.add(CURRENCY_ACTIVE_CLASS); 
+      this.currencyDrop.classList.add(CURRENCY_ACTIVE_CLASS);
     }
   }
 
@@ -116,12 +124,16 @@ class App {
     method.classList.add("pay-form__method_active");
 
     this.data.methodId = methodId;
-
+  
     this.activateActions();
   }
 
   activateActions() {
     const ACTIVE_CLASS = "pay-form__actions_active";
+
+    setTimeout(() => {
+      this.payBody.classList.add("pay-form__body_minheight1");
+    }, 1000);
 
     if (!this.actions.classList.contains(ACTIVE_CLASS)) {
       this.actions.classList.add(ACTIVE_CLASS);
@@ -144,8 +156,6 @@ class App {
     this.selectedCurrency.innerText = newCurrency;
 
     this.data.currency = newCurrency;
-
-    this.toggleCurrencyDrop();
   }
 
   amountInputActive(e) {
@@ -169,7 +179,62 @@ class App {
       this.phoneInput.classList.remove("base-input__input_error");
     }
 
-    this.data.phoneNumber = this.data.phoneMask.value;
+    const chars = this.data.phoneChars;
+    const value = e.target.value;
+    const mask = this.getMaskOfCode(value);
+
+    if (value[0] !== "+") {
+      if (!this.data.phoneMask) {
+        e.target.value = "+" + e.target.value;
+      }
+    }
+
+    if (!chars.some((char) => char == value[ value.length - 1 ])) {
+      if (!this.data.phoneMask) {
+        e.target.value = e.target.value.slice(0, value.length - 1);
+      }
+    }
+
+    if ((value.length === 1 || value === "") && this.data.phoneMask) {
+      this.data.phoneMask.destroy();
+
+      this.data.phoneMask = false;
+
+      this.data.phoneNumber = "";
+    }
+
+    if (mask && !this.data.phoneMask) this.data.phoneMask = IMask(this.phoneInput, {mask});
+
+    if (this.data.phoneMask) {
+      this.data.phoneNumber = this.data.phoneMask.value;
+    }
+  }
+
+  getMaskOfCode(code) {
+    if (code[0] !== "+") code = "+" + code;
+
+    switch(code) {
+      case "+7":
+        return "+{7} 000 000 00 00";
+      case "+380":
+        return "+{380} 00 0000000";
+      case "+371":
+        return "+{371} 0000 0000";
+      case "+374":
+        return "+{374} 000 000 00 00";
+      case "+375":
+        return "+{375} 00 000 00 00";
+      case "+996":
+        return "+{996} 000 000000";
+      case "+373":
+        return "+{373} 000 00 000";
+      case "+992":
+        return "+{992} 00 000 0000";
+      case "+998":
+        return "+{998} 00 000 0000";
+        default: 
+        return "";
+    }
   }
 
   emailInputActive(e) {
@@ -195,7 +260,9 @@ class App {
   }
 
   togglePhoneMessage(e) {
-    const CURRENCY_ACTIVE_CLASS = "base-input__message_active"; 
+    if (!this.data.payStateActive) return; 
+
+    const CURRENCY_ACTIVE_CLASS = "base-input__message_active";
     
     if (this.phoneMessage.classList.contains(CURRENCY_ACTIVE_CLASS)) {
       this.phoneMessage.classList.remove(CURRENCY_ACTIVE_CLASS);
@@ -205,6 +272,8 @@ class App {
   }
 
   toggleEmailMessage(e) {
+    if (!this.data.payStateActive) return; 
+
     const CURRENCY_ACTIVE_CLASS = "base-input__message_active"; 
     
     if (this.emailMessage.classList.contains(CURRENCY_ACTIVE_CLASS)) {

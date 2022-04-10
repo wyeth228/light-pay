@@ -5,8 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pay</title>
-
-  <link rel="stylesheet" href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css">
 </head>
 <body>
   <div class="wrapper">
@@ -16,19 +14,19 @@
       <section class="pay-form__body">
 
         <!-- default state -->
-        <div class="pay-form__default">
+        <div class="pay-form__default pay-form__default_active">
           <section class="pay-form__methods" id="pay-form__methods">
             <div class="pay-form__method" data-id="1">
-              <img src="../src/assets/icons/qiwi.svg" alt="qiwi" data-id="1">
+              <img src="<%=require('../src/assets/icons/qiwi.svg')%>" alt="qiwi" data-id="1">
             </div>
             <div class="pay-form__method" data-id="2">
-              <img src="../src/assets/icons/umoney.svg" alt="umoney" data-id="2">
+              <img src="<%=require('../src/assets/icons/umoney.svg')%>" alt="umoney" data-id="2">
             </div>
             <div class="pay-form__method" data-id="3">
-              <img src="../src/assets/icons/master-card.png" alt="master-card" data-id="3">        
+              <img src="<%=require('../src/assets/icons/master-card.png')%>" alt="master-card" data-id="3">        
             </div>
             <div class="pay-form__method" data-id="4">
-              <img src="../src/assets/icons/master-card.png" alt="master-card" data-id="4">   
+              <img src="<%=require('../src/assets/icons/master-card.png')%>" alt="master-card" data-id="4">   
             </div>
           </section>
 
@@ -38,18 +36,16 @@
               <div class="amount-input__currency">
                 <div class="amount-input__currency-curr" id="currency-btn">
                   <span id="selected-currency">₽</span>
-                  <div class="amount-input__currency-drop-wrapper">
-                    <div class="amount-input__currency-drop" id="currency-drop">
-                      <div class="amount-input__currency-item">
-                        $
-                      </div>
-                      <div class="amount-input__currency-item">
-                        €
-                      </div>
-                      <div class="amount-input__currency-item">
-                        ₴
-                      </div>
-                    </div>
+                </div>
+                <div class="amount-input__currency-drop" id="currency-drop">
+                  <div class="amount-input__currency-item">
+                    $
+                  </div>
+                  <div class="amount-input__currency-item">
+                    €
+                  </div>
+                  <div class="amount-input__currency-item">
+                    ₴
                   </div>
                 </div>
               </div>
@@ -67,7 +63,7 @@
         <section class="pay-form__pay" id="pay-form__pay">
 
           <div class="pay-form__pay-logo">
-            <img src="../src/assets/icons/qiwi.svg" alt="qiwi" id="pay-form__pay-logo">
+            <img src="<%=require('../src/assets/icons/qiwi.svg')%>" alt="qiwi" id="pay-form__pay-logo">
           </div>
           
           <div class="pay-form__total-amount">

@@ -20,6 +20,16 @@
     box-shadow: 0px 56px 65px rgba(0, 0, 0, 0.05);
 
     border-radius: 30px;
+
+    transition: min-height linear 0.4s;
+
+    &_minheight1 {
+      min-height: 598px;
+    }
+
+    &_minheight2 {
+      min-height: 554px;
+    }
   }
 
   &__methods {
@@ -105,8 +115,6 @@
     width: 100%;
     height: 0;
 
-    overflow: hidden;
-
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -137,7 +145,7 @@
 
       opacity: 1;
 
-      transition-delay: 0s;
+      -webkit-transition-delay: 0s;-moz-transition-delay: 0s;-o-transition-delay: 0s;transition-delay: 0s;
     }
   }
 
@@ -147,6 +155,22 @@
 
   &__btn {
     margin-top: 35px;
+  }
+
+  &__default {
+    opacity: 0;
+    
+    visibility: hidden;
+
+    transition: visibility 0s linear 0.8s, opacity linear 0.2s;
+ 
+    &_active {
+      visibility: visible;
+
+      opacity: 1;
+
+      -webkit-transition-delay: 0s;-moz-transition-delay: 0s;-o-transition-delay: 0s;transition-delay: 0s;
+    }
   }
 
   &__pay {
@@ -171,22 +195,21 @@
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-
-    -webkit-transition: visibility 0s linear 0.5s, opacity linear 0.5s, height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;-o-transition: visibility 0s linear 0.5s, opacity linear 0.5s, height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;-moz-transition: visibility 0s linear 0.5s, opacity linear 0.5s, height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;transition: visibility 0s linear 0.5s, opacity linear 0.5s, height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;
+    
     opacity: 0;
-
+    
     visibility: hidden;
+    
+    transition: visibility 0s linear 0.8s, opacity cubic-bezier(0.33, 1, 0.68, 1) 2.2s;
 
     &_active {
-      height: 448px;
-
-      overflow: visible;
+      height: 100%;
 
       visibility: visible;
 
       opacity: 1;
 
-      transition-delay: 0s;
+      -webkit-transition-delay: 0s;-moz-transition-delay: 0s;-o-transition-delay: 0s;transition-delay: 0s;
     }
   }
 
@@ -257,6 +280,10 @@
 
       padding: 27px 25px;
       margin: 30px auto;
+
+      &_minheight2 {
+        min-height: 499px;
+      }
     }
 
     &__methods {
