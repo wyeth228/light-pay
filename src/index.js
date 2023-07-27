@@ -3,7 +3,7 @@ import "@/less/index.less";
 import amountFormat from "../src/js/amountFormat";
 import validateEmail from "../src/js/validateEmail";
 
-import IMask from 'imask';
+import IMask from "imask";
 
 class App {
   constructor() {
@@ -21,39 +21,43 @@ class App {
     };
 
     this.imgData = {
-      path: "../src/assets/icons/",
+      path: "./assets/icons/",
       methods: {
         1: "qiwi.svg",
         2: "umoney.svg",
         3: "master-card.png",
-        4: "master-card.png"
-      }
+        4: "master-card.png",
+      },
     };
 
-    this.title   = document.getElementById("pay-form__title");
+    this.title = document.getElementById("pay-form__title");
     this.payBody = document.getElementsByClassName("pay-form__body")[0];
 
     this.defaultState = document.getElementsByClassName("pay-form__default")[0];
-      this.methods = Array.from(document.getElementsByClassName("pay-form__method"));
-      this.actions = document.getElementById("pay-form__actions");
-      this.amountInput = document.getElementById("amount-input__input");
-      this.currencyBtn = document.getElementById("currency-btn");
-      this.selectedCurrency = document.getElementById("selected-currency");
-      this.currencyDrop = document.getElementById("currency-drop");
-      this.currencyElems = Array.from(document.getElementsByClassName("amount-input__currency-item"));
-      this.nextBtn = document.getElementById("next-btn");
+    this.methods = Array.from(
+      document.getElementsByClassName("pay-form__method")
+    );
+    this.actions = document.getElementById("pay-form__actions");
+    this.amountInput = document.getElementById("amount-input__input");
+    this.currencyBtn = document.getElementById("currency-btn");
+    this.selectedCurrency = document.getElementById("selected-currency");
+    this.currencyDrop = document.getElementById("currency-drop");
+    this.currencyElems = Array.from(
+      document.getElementsByClassName("amount-input__currency-item")
+    );
+    this.nextBtn = document.getElementById("next-btn");
 
     this.payState = document.getElementsByClassName("pay-form__pay")[0];
-      this.payLogo = document.getElementById("pay-form__pay-logo");
-      this.totalAmount = document.getElementById("pay-form__total-amount");
-      this.totalCurrency = document.getElementById("pay-form__total-currency");
-      this.phoneInput = document.getElementById("pay-form__phone-input");
-      this.phoneBtn = document.getElementById("phone-input__btn");
-      this.phoneMessage = document.getElementById("phone-input__message");
-      this.emailInput = document.getElementById("base-input__email-input");
-      this.emailBtn = document.getElementById("email-input__btn");
-      this.emailMessage = document.getElementById("email-input__message");
-      this.sendBtn = document.getElementById("send-btn");
+    this.payLogo = document.getElementById("pay-form__pay-logo");
+    this.totalAmount = document.getElementById("pay-form__total-amount");
+    this.totalCurrency = document.getElementById("pay-form__total-currency");
+    this.phoneInput = document.getElementById("pay-form__phone-input");
+    this.phoneBtn = document.getElementById("phone-input__btn");
+    this.phoneMessage = document.getElementById("phone-input__message");
+    this.emailInput = document.getElementById("base-input__email-input");
+    this.emailBtn = document.getElementById("email-input__btn");
+    this.emailMessage = document.getElementById("email-input__message");
+    this.sendBtn = document.getElementById("send-btn");
 
     this.initEvents();
   }
@@ -62,8 +66,14 @@ class App {
     this.methods.forEach((method) => {
       method.addEventListener("click", this.selectMethod.bind(this, method));
     });
-    this.amountInput.addEventListener("input", this.amountInputActive.bind(this));
-    this.currencyBtn.addEventListener("click", this.toggleCurrencyDrop.bind(this));
+    this.amountInput.addEventListener(
+      "input",
+      this.amountInputActive.bind(this)
+    );
+    this.currencyBtn.addEventListener(
+      "click",
+      this.toggleCurrencyDrop.bind(this)
+    );
     this.currencyElems.forEach((elem) => {
       elem.addEventListener("click", this.changeCurrency.bind(this));
     });
@@ -91,13 +101,12 @@ class App {
 
       this.payState.classList.add("pay-form__pay_active");
 
-      setTimeout(() => {
-        this.payState.style.overflow = "visible";
-        this.data.payStateActive = true;
-      }, 2000);
+      this.payState.style.overflow = "visible";
+      this.data.payStateActive = true;
     }, 200);
 
-    this.payLogo.src = this.imgData.path + this.imgData.methods[ this.data.methodId ];
+    this.payLogo.src =
+      this.imgData.path + this.imgData.methods[this.data.methodId];
 
     this.totalAmount.innerHTML = this.data.amount;
     this.totalCurrency.innerHTML = this.data.currency;
@@ -107,7 +116,7 @@ class App {
     if (e) e.stopPropagation();
 
     const CURRENCY_ACTIVE_CLASS = "amount-input__currency-drop_active";
-    
+
     if (this.currencyDrop.classList.contains(CURRENCY_ACTIVE_CLASS)) {
       this.currencyDrop.classList.remove(CURRENCY_ACTIVE_CLASS);
     } else {
@@ -124,7 +133,7 @@ class App {
     method.classList.add("pay-form__method_active");
 
     this.data.methodId = methodId;
-  
+
     this.activateActions();
   }
 
@@ -144,12 +153,14 @@ class App {
     this.toggleCurrencyDrop();
 
     const newCurrency = e.target.innerHTML;
-    const newCurrencies = this.currencies.filter((currency) => currency !== newCurrency);
+    const newCurrencies = this.currencies.filter(
+      (currency) => currency !== newCurrency
+    );
 
     let i = 0;
     this.currencyElems.forEach((elem) => {
       elem.innerHTML = newCurrencies[i];
-    
+
       i++;
     });
 
@@ -165,7 +176,11 @@ class App {
 
     let inputValue = e.target.value;
 
-    if (isNaN(Number(inputValue[inputValue.length - 1])) || inputValue.length >= 9) { // Если последний введенный символ это не цифра      
+    if (
+      isNaN(Number(inputValue[inputValue.length - 1])) ||
+      inputValue.length >= 9
+    ) {
+      // Если последний введенный символ это не цифра
       e.target.value = e.target.value.slice(0, e.target.value.length - 1);
     } else {
       e.target.value = amountFormat(inputValue);
@@ -189,7 +204,7 @@ class App {
       }
     }
 
-    if (!chars.some((char) => char == value[ value.length - 1 ])) {
+    if (!chars.some((char) => char == value[value.length - 1])) {
       if (!this.data.phoneMask) {
         e.target.value = e.target.value.slice(0, value.length - 1);
       }
@@ -203,7 +218,8 @@ class App {
       this.data.phoneNumber = "";
     }
 
-    if (mask && !this.data.phoneMask) this.data.phoneMask = IMask(this.phoneInput, {mask});
+    if (mask && !this.data.phoneMask)
+      this.data.phoneMask = IMask(this.phoneInput, { mask });
 
     if (this.data.phoneMask) {
       this.data.phoneNumber = this.data.phoneMask.value;
@@ -213,9 +229,11 @@ class App {
   getMaskOfCode(code) {
     if (code[0] !== "+") code = "+" + code;
 
-    switch(code) {
+    switch (code) {
       case "+7":
         return "+{7} 000 000 00 00";
+      case "+8":
+        return "+{8} 000 000 00 00";
       case "+380":
         return "+{380} 00 0000000";
       case "+371":
@@ -232,7 +250,7 @@ class App {
         return "+{992} 00 000 0000";
       case "+998":
         return "+{998} 00 000 0000";
-        default: 
+      default:
         return "";
     }
   }
@@ -260,33 +278,33 @@ class App {
   }
 
   togglePhoneMessage(e) {
-    if (!this.data.payStateActive) return; 
+    if (!this.data.payStateActive) return;
 
     const CURRENCY_ACTIVE_CLASS = "base-input__message_active";
-    
+
     if (this.phoneMessage.classList.contains(CURRENCY_ACTIVE_CLASS)) {
       this.phoneMessage.classList.remove(CURRENCY_ACTIVE_CLASS);
     } else {
-      this.phoneMessage.classList.add(CURRENCY_ACTIVE_CLASS); 
+      this.phoneMessage.classList.add(CURRENCY_ACTIVE_CLASS);
     }
   }
 
   toggleEmailMessage(e) {
-    if (!this.data.payStateActive) return; 
+    if (!this.data.payStateActive) return;
 
-    const CURRENCY_ACTIVE_CLASS = "base-input__message_active"; 
-    
+    const CURRENCY_ACTIVE_CLASS = "base-input__message_active";
+
     if (this.emailMessage.classList.contains(CURRENCY_ACTIVE_CLASS)) {
       this.emailMessage.classList.remove(CURRENCY_ACTIVE_CLASS);
     } else {
-      this.emailMessage.classList.add(CURRENCY_ACTIVE_CLASS); 
+      this.emailMessage.classList.add(CURRENCY_ACTIVE_CLASS);
     }
   }
 
   send(e) {
     if (this.data.phoneNumber.length < 12) {
       this.phoneInput.classList.add("base-input__input_error");
-   
+
       return;
     }
 

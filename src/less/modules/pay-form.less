@@ -1,4 +1,7 @@
 .pay-form {
+  margin-top: 181px;
+  margin-bottom: 181px;
+  max-width: 500px;
 
   &__title {
     font-weight: 600;
@@ -12,11 +15,9 @@
 
     margin-top: 30px;
     padding: 56px 38px;
-    
+
     background-color: #fff;
 
-    -webkit-box-shadow: 0px 56px 65px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0px 56px 65px rgba(0, 0, 0, 0.05);
     box-shadow: 0px 56px 65px rgba(0, 0, 0, 0.05);
 
     border-radius: 30px;
@@ -35,13 +36,7 @@
   &__methods {
     width: 100%;
 
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 
     white-space: pre-wrap;
@@ -59,23 +54,11 @@
     border: 3px solid #0000002c;
     border-radius: 20px;
 
-    display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -moz-inline-box;
-    display: -ms-inline-flexbox;
     display: inline-flex;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
 
-    -webkit-transition: -webkit-box-shadow ease 0.3s;transition: -webkit-box-shadow ease 0.3s;-o-transition: box-shadow ease 0.3s;-moz-transition: box-shadow ease 0.3s, -moz-box-shadow ease 0.3s;transition: box-shadow ease 0.3s;transition: box-shadow ease 0.3s, -webkit-box-shadow ease 0.3s, -moz-box-shadow ease 0.3s;
+    transition: box-shadow ease 0.3s;
 
     cursor: pointer;
 
@@ -100,14 +83,9 @@
     }
 
     &_active {
-      -webkit-transition: border linear 0.3s, -webkit-box-shadow ease 0.3s;
-      transition: border linear 0.3s, -webkit-box-shadow ease 0.3s;
-      -o-transition: box-shadow ease 0.3s, border linear 0.3s;
-      -moz-transition: box-shadow ease 0.3s, border linear 0.3s, -moz-box-shadow ease 0.3s;
       transition: box-shadow ease 0.3s, border linear 0.3s;
-      transition: box-shadow ease 0.3s, border linear 0.3s, -webkit-box-shadow ease 0.3s, -moz-box-shadow ease 0.3s;
 
-      border: 3px solid #0085FF;
+      border: 3px solid #0085ff;
     }
   }
 
@@ -115,27 +93,14 @@
     width: 100%;
     height: 0;
 
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -moz-box-orient: vertical;
-    -moz-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
 
-    -webkit-transition: visibility 0s linear 0.5s, opacity linear 0.5s, height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;-o-transition: visibility 0s linear 0.5s, opacity linear 0.5s, height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;-moz-transition: visibility 0s linear 0.5s, opacity linear 0.5s, height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;transition: visibility 0s linear 0.5s, opacity linear 0.5s, height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;
-    opacity: 0;
+    transition: visibility 0s linear 0.5s, opacity linear 0.5s,
+      height cubic-bezier(0.33, 1, 0.68, 1) 0.5s;
 
+    opacity: 0;
     visibility: hidden;
 
     &_active {
@@ -145,7 +110,7 @@
 
       opacity: 1;
 
-      -webkit-transition-delay: 0s;-moz-transition-delay: 0s;-o-transition-delay: 0s;transition-delay: 0s;
+      transition-delay: 0s;
     }
   }
 
@@ -159,17 +124,17 @@
 
   &__default {
     opacity: 0;
-    
+
     visibility: hidden;
 
     transition: visibility 0s linear 0.8s, opacity linear 0.2s;
- 
+
     &_active {
       visibility: visible;
 
       opacity: 1;
 
-      -webkit-transition-delay: 0s;-moz-transition-delay: 0s;-o-transition-delay: 0s;transition-delay: 0s;
+      transition-delay: 0s;
     }
   }
 
@@ -178,29 +143,16 @@
 
     overflow: hidden;
 
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -moz-box-orient: vertical;
-    -moz-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    
+
     opacity: 0;
-    
+
     visibility: hidden;
-    
-    transition: visibility 0s linear 0.8s, opacity cubic-bezier(0.33, 1, 0.68, 1) 2.2s;
+
+    transition: visibility 0s linear 0.8s,
+      opacity cubic-bezier(0.33, 1, 0.68, 1) 2.2s;
 
     &_active {
       height: 100%;
@@ -209,7 +161,7 @@
 
       opacity: 1;
 
-      -webkit-transition-delay: 0s;-moz-transition-delay: 0s;-o-transition-delay: 0s;transition-delay: 0s;
+      transition-delay: 0s;
     }
   }
 
@@ -234,12 +186,10 @@
       width: 100%;
       height: 6px;
 
-      background-color: #0085FF;
-      
-      -webkit-box-shadow: 0px 8px 20px rgba(0, 133, 255, 0.25);
-      -moz-box-shadow: 0px 8px 20px rgba(0, 133, 255, 0.25);
+      background-color: #0085ff;
+
       box-shadow: 0px 8px 20px rgba(0, 133, 255, 0.25);
-      
+
       border-radius: 17px;
     }
   }
@@ -258,12 +208,14 @@
   }
 }
 
+@media screen and (max-width: 375px) {
+  .pay-form {
+    margin-top: 115px;
+  }
+}
+
 @media screen and (max-width: 535px) {
   .pay-form {
-
-    margin-top: 125px;
-    padding-bottom: 125px;
-
     &__title {
       font-size: 18px;
       font-style: normal;
@@ -287,10 +239,6 @@
     }
 
     &__methods {
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -moz-box-pack: center;
-      -ms-flex-pack: center;
       justify-content: center;
     }
 
@@ -313,15 +261,15 @@
     }
 
     &__amount {
-      width: 100% !important;
+      width: 100%;
 
       &-input {
-        width: 100% !important;
+        width: 100%;
       }
     }
 
     &__btn {
-      width: 100% !important;
+      width: 100%;
     }
 
     &__total-amount {

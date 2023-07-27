@@ -3,6 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, "src/index.js"),
@@ -14,11 +15,11 @@ module.exports = {
     rules: [
       {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
       },
       {
         test: /\.tsx?$/,
-        use: "ts-loader"
+        use: "ts-loader",
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -27,26 +28,29 @@ module.exports = {
         options: {
           name: "[name].[ext]",
           outputPath: "assets/icons/",
-          esModule: false
-        }
+          esModule: false,
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource"
+        type: "asset/resource",
       },
     ],
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"],
     alias: {
-      "@": path.resolve(__dirname, "src/")
-    }
+      "@": path.resolve(__dirname, "src/"),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public/index.html")
+      template: path.resolve(__dirname, "public/index.html"),
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
-  ]
-}
+    new CopyWebpackPlugin({
+      patterns: [{ from: path.resolve(__dirname, "src/assets"), to: "assets" }],
+    }),
+  ],
+};
